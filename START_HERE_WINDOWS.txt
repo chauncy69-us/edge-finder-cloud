@@ -1,0 +1,31 @@
+EDGE FINDER CLOUD 4.1  |  PUBLISH ONLINE
+
+The ZIP is website SOURCE CODE; it is not yet a live website.
+Once published, use an ordinary Chrome URL (no ZIP files).
+
+WINDOWS SETUP
+1. Sign in at github.com and create a new PUBLIC repository named edge-finder-cloud.
+2. Install GitHub Desktop (desktop.github.com). Clone the new repository.
+3. Extract this ZIP and open the Edge_Finder_Hosted folder.
+4. Copy ALL contents (including .github) into the cloned repository folder.
+   The 'site', 'scripts' and '.github' folders must be at the repository ROOT.
+5. In GitHub Desktop: Commit to main, then Push origin.
+6. On GitHub website: repo Settings > Pages > Source > GitHub Actions.
+7. In repo Actions: run 'Refresh and deploy Edge Finder' manually.
+8. Under Settings > Pages, select Visit site after the action succeeds.
+9. Bookmark your own GitHub Pages URL.
+
+AUTOMATIC DATA CHECKS
+GitHub Actions attempts updates twice daily. Not real-time; upstream delays can occur.
+Data freshness appears under Data & Settings.
+If you haven't enabled Pages, a website will not be published.
+If source refresh fails, inspect Actions logs. GitHub scheduled actions may stop
+after 60 days without repository activity on public repositories.
+
+PRIVACY & DATA
+Your GitHub Pages site/repository will be PUBLIC. Do not upload passwords,
+Bet365 account details, personal tickets, or private files.
+Bet365 odds are manually entered. Personal research journals stay in your browser
+and are not synchronized across devices. Export backup regularly.
+
+Full instructions in README_START_HERE.md.

@@ -1,0 +1,61 @@
+name: Refresh and deploy Edge Finder
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '25 11 * * *'
+    - cron: '25 22 * * *'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: edge-finder-pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out application
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore last good data cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/feeds
+          key: edgefinder-v1-${{ github.run_id }}
+          restore-keys: |
+            edgefinder-v1-
+      - name: Download and validate historical datasets
+        run: python scripts/refresh_data.py
+      - name: Check generated bundle
+        run: python -m unittest discover -s tests -v
+      - name: Save last good data cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/feeds
+          key: edgefinder-v1-${{ github.run_id }}
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Publish site
+        id: deploy
+        uses: actions/deploy-pages@v4

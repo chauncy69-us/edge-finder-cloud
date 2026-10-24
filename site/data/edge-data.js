@@ -1,0 +1,1 @@
+window.EDGE_AUTOFEED={generated:null,versionId:"deployment-pending",nfl:[],games:"",ufc:"",ufcEvents:"",sources:{},issues:["Cloud data refresh has not run yet. Open GitHub Actions and run Refresh & deploy Edge Finder."],health:{}};
